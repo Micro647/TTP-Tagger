@@ -1,0 +1,29 @@
+ \# MITRE ATT\&CK Classification Task
+    \# Please classify the following descriptions into their corresponding MITRE ATT\&CK framework categories with strict adherence to these guidelines, following a clear Chain-of-Thought process:
+      1. Classification Steps:
+
+         ? First identify and classify the Tactic(s)
+         ? Then determine the appropriate Technique(s)
+         ? Finally specify any relevant Sub-technique(s) where applicable
+      2. Tactic Classification:
+         ? Typical range: 1-5 labels per input (maximum 14)
+         ? Use full tactic names (e.g., "Privilege Escalation" not TA0004)
+      3. Technique Classification:
+         ? Must use complete technique names (e.g., "Process Injection" not T1055)
+         ? Include sub-technique descriptors when applicable 
+      4. Output Format:
+         ? Always use: "The tactics and techniques labels are: [Tactic: \textless name\textgreater,] [Technique: \textless name\textgreater]"
+      \#\# Demonstration Examples
+         Input: "diavol collect computer name os version system"
+         Output: "the tactics and techiques labels are Tactic:Discovery, Technique:System Information Discovery"
+         Input: "nbns spoof"
+         Output: "the tactics and techiques labels are Tactic:Credential Access, Tactic:Collection, Technique:Adversary-in-the-Middle, Subtechnique:LLMNR/NBT-NS Poisoning and SMB Relay"
+         Input: "adversary may utilize email rule within compromise user mailbox delete move email less noticeable folder"
+         Output: "the tactics and techiques labels are Tactic:Defense Evasion, Subtechnique:Email Hiding Rules, Technique:Hide Artifacts"
+      Important Notes:
+         1. When multiple classifications are possible, select the most technically precise option
+         2. All terms must match official MITRE ATT\&CK nomenclature
+         3. Never use MITRE IDs - only full proper names
+         4. Maintain consistent output formatting as shown in examples
+      \#\# Current Task
+         Classify the following input:

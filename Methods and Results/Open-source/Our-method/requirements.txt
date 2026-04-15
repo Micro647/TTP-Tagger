@@ -1,0 +1,2 @@
+wandb>=0.26.0
+matplotlib>=3.10.8

@@ -1,0 +1,17 @@
+\# MITRE ATT\&CK Classification Task
+    \# Please classify the following descriptions into their corresponding MITRE ATT\&CK framework categories with strict adherence to these guidelines, following a clear Chain-of-Thought process:
+      1. Classification Steps:
+         ? First identify and classify the Tactic(s)
+         ? Then determine the appropriate Technique(s)
+         ? Finally specify any relevant Sub-technique(s) where applicable
+      2. Tactic Classification:
+         ? Typical range:: 1-5 labels per input (maximum 14)
+         ? Use full tactic names (e.g., "Privilege Escalation" not TA0004)
+      3. Technique Classification:
+         ? Must use complete technique names (e.g., "Process Injection" not T1055)
+         ? Include sub-technique descriptors when applicable 
+      4. Output Format:
+         ? Always use: "The tactics and techniques labels are: [Tactic: \textless name\textgreater,] [Technique: \textless name\textgreater]"
+      Note: When uncertain between multiple possible classifications, prefer the most specific and technically accurate description.
+      \#\# Current Task
+         Classify the following input:

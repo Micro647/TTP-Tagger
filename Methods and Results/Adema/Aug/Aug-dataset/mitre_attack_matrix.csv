@@ -1,0 +1,591 @@
+Label,Name,Type
+TA0043,Reconnaissance,Tactic
+T1595,Active Scanning,Technique
+T1595.001,Scanning IP Blocks,Subtechnique
+T1595.002,Vulnerability Scanning,Subtechnique
+T1595.003,Wordlist Scanning,Subtechnique
+T1592,Gather Victim Host Information,Technique
+T1592.001,Hardware,Subtechnique
+T1592.002,Software,Subtechnique
+T1592.003,Firmware,Subtechnique
+T1592.004,Client Configurations,Subtechnique
+T1589,Gather Victim Identity Information,Technique
+T1589.001,Credentials,Subtechnique
+T1589.002,Email Addresses,Subtechnique
+T1589.003,Employee Names,Subtechnique
+T1590,Gather Victim Network Information,Technique
+T1590.001,Domain Properties,Subtechnique
+T1590.002,DNS,Subtechnique
+T1590.003,Network Trust Dependencies,Subtechnique
+T1590.004,Network Topology,Subtechnique
+T1590.005,IP Addresses,Subtechnique
+T1590.006,Network Security Appliances,Subtechnique
+T1591,Gather Victim Org Information,Technique
+T1591.001,Determine Physical Locations,Subtechnique
+T1591.002,Business Relationships,Subtechnique
+T1591.003,Identify Business Tempo,Subtechnique
+T1591.004,Identify Roles,Subtechnique
+T1598,Phishing for Information,Technique
+T1598.001,Spearphishing Service,Subtechnique
+T1598.002,Spearphishing Attachment,Subtechnique
+T1598.003,Spearphishing Link,Subtechnique
+T1597,Search Closed Sources,Technique
+T1597.001,Threat Intel Vendors,Subtechnique
+T1597.002,Purchase Technical Data,Subtechnique
+T1596,Search Open Technical Databases,Technique
+T1596.001,DNS/Passive DNS,Subtechnique
+T1596.002,WHOIS,Subtechnique
+T1596.003,Digital Certificates,Subtechnique
+T1596.004,CDNs,Subtechnique
+T1596.005,Scan Databases,Subtechnique
+T1593,Search Open Websites/Domains,Technique
+T1593.001,Social Media,Subtechnique
+T1593.002,Search Engines,Subtechnique
+T1594,Search Victim-Owned Websites,Technique
+TA0042,Resource Development,Tactic
+T1583,Acquire Infrastructure,Technique
+T1583.001,Domains,Subtechnique
+T1583.002,DNS Server,Subtechnique
+T1583.003,Virtual Private Server,Subtechnique
+T1583.004,Server,Subtechnique
+T1583.005,Botnet,Subtechnique
+T1583.006,Web Services,Subtechnique
+T1586,Compromise Accounts,Technique
+T1586.001,Social Media Accounts,Subtechnique
+T1586.002,Email Accounts,Subtechnique
+T1584,Compromise Infrastructure,Technique
+T1584.001,Domains,Subtechnique
+T1584.002,DNS Server,Subtechnique
+T1584.003,Virtual Private Server,Subtechnique
+T1584.004,Server,Subtechnique
+T1584.005,Botnet,Subtechnique
+T1584.006,Web Services,Subtechnique
+T1587,Develop Capabilities,Technique
+T1587.001,Malware,Subtechnique
+T1587.002,Code Signing Certificates,Subtechnique
+T1587.003,Digital Certificates,Subtechnique
+T1587.004,Exploits,Subtechnique
+T1585,Establish Accounts,Technique
+T1585.001,Social Media Accounts,Subtechnique
+T1585.002,Email Accounts,Subtechnique
+T1588,Obtain Capabilities,Technique
+T1588.001,Malware,Subtechnique
+T1588.002,Tool,Subtechnique
+T1588.003,Code Signing Certificates,Subtechnique
+T1588.004,Digital Certificates,Subtechnique
+T1588.005,Exploits,Subtechnique
+T1588.006,Vulnerabilities,Subtechnique
+T1608,Stage Capabilities,Technique
+T1608.001,Upload Malware,Subtechnique
+T1608.002,Upload Tool,Subtechnique
+T1608.003,Install Digital Certificate,Subtechnique
+T1608.004,Drive-by Target,Subtechnique
+T1608.005,Link Target,Subtechnique
+TA0001,Initial Access,Tactic
+T1189,Drive-by Compromise,Technique
+T1190,Exploit Public-Facing Application,Technique
+T1133,External Remote Services,Technique
+T1200,Hardware Additions,Technique
+T1566,Phishing,Technique
+T1566.001,Spearphishing Attachment,Subtechnique
+T1566.002,Spearphishing Link,Subtechnique
+T1566.003,Spearphishing via Service,Subtechnique
+T1091,Replication Through Removable Media,Technique
+T1195,Supply Chain Compromise,Technique
+T1195.001,Compromise Software Dependencies and Development Tools,Subtechnique
+T1195.002,Compromise Software Supply Chain,Subtechnique
+T1195.003,Compromise Hardware Supply Chain,Subtechnique
+T1199,Trusted Relationship,Technique
+T1078,Valid Accounts,Technique
+T1078.001,Default Accounts,Subtechnique
+T1078.002,Domain Accounts,Subtechnique
+T1078.003,Local Accounts,Subtechnique
+T1078.004,Cloud Accounts,Subtechnique
+TA0002,Execution,Tactic
+T1059,Command and Scripting Interpreter,Technique
+T1059.001,PowerShell,Subtechnique
+T1059.002,AppleScript,Subtechnique
+T1059.003,Windows Command Shell,Subtechnique
+T1059.004,Unix Shell,Subtechnique
+T1059.005,Visual Basic,Subtechnique
+T1059.006,Python,Subtechnique
+T1059.007,JavaScript,Subtechnique
+T1059.008,Network Device CLI,Subtechnique
+T1609,Container Administration Command,Technique
+T1610,Deploy Container,Technique
+T1203,Exploitation for Client Execution,Technique
+T1559,Inter-Process Communication,Technique
+T1559.001,Component Object Model,Subtechnique
+T1559.002,Dynamic Data Exchange,Subtechnique
+T1559.003,XPC Services,Subtechnique
+T1106,Native API,Technique
+T1053,Scheduled Task/Job,Technique
+T1053.002,At,Subtechnique
+T1053.003,Cron,Subtechnique
+T1053.005,Scheduled Task,Subtechnique
+T1053.006,Systemd Timers,Subtechnique
+T1053.007,Container Orchestration Job,Subtechnique
+T1129,Shared Modules,Technique
+T1072,Software Deployment Tools,Technique
+T1569,System Services,Technique
+T1569.001,Launchctl,Subtechnique
+T1569.002,Service Execution,Subtechnique
+T1204,User Execution,Technique
+T1204.001,Malicious Link,Subtechnique
+T1204.002,Malicious File,Subtechnique
+T1204.003,Malicious Image,Subtechnique
+T1047,Windows Management Instrumentation,Technique
+TA0003,Persistence,Tactic
+T1098,Account Manipulation,Technique
+T1098.001,Additional Cloud Credentials,Subtechnique
+T1098.002,Additional Email Delegate Permissions,Subtechnique
+T1098.003,Additional Cloud Roles,Subtechnique
+T1098.004,SSH Authorized Keys,Subtechnique
+T1098.005,Device Registration,Subtechnique
+T1197,BITS Jobs,Technique
+T1547,Boot or Logon Autostart Execution,Technique
+T1547.001,Registry Run Keys / Startup Folder,Subtechnique
+T1547.002,Authentication Package,Subtechnique
+T1547.003,Time Providers,Subtechnique
+T1547.004,Winlogon Helper DLL,Subtechnique
+T1547.005,Security Support Provider,Subtechnique
+T1547.006,Kernel Modules and Extensions,Subtechnique
+T1547.007,Re-opened Applications,Subtechnique
+T1547.008,LSASS Driver,Subtechnique
+T1547.009,Shortcut Modification,Subtechnique
+T1547.010,Port Monitors,Subtechnique
+T1547.012,Print Processors,Subtechnique
+T1547.013,XDG Autostart Entries,Subtechnique
+T1547.014,Active Setup,Subtechnique
+T1547.015,Login Items,Subtechnique
+T1037,Boot or Logon Initialization Scripts,Technique
+T1037.001,Logon Script (Windows),Subtechnique
+T1037.002,Login Hook,Subtechnique
+T1037.003,Network Logon Script,Subtechnique
+T1037.004,RC Scripts,Subtechnique
+T1037.005,Startup Items,Subtechnique
+T1176,Browser Extensions,Technique
+T1554,Compromise Client Software Binary,Technique
+T1136,Create Account,Technique
+T1136.001,Local Account,Subtechnique
+T1136.002,Domain Account,Subtechnique
+T1136.003,Cloud Account,Subtechnique
+T1543,Create or Modify System Process,Technique
+T1543.001,Launch Agent,Subtechnique
+T1543.002,Systemd Service,Subtechnique
+T1543.003,Windows Service,Subtechnique
+T1543.004,Launch Daemon,Subtechnique
+T1546,Event Triggered Execution,Technique
+T1546.001,Change Default File Association,Subtechnique
+T1546.002,Screensaver,Subtechnique
+T1546.003,Windows Management Instrumentation Event Subscription,Subtechnique
+T1546.004,Unix Shell Configuration Modification,Subtechnique
+T1546.005,Trap,Subtechnique
+T1546.006,LC_LOAD_DYLIB Addition,Subtechnique
+T1546.007,Netsh Helper DLL,Subtechnique
+T1546.008,Accessibility Features,Subtechnique
+T1546.009,AppCert DLLs,Subtechnique
+T1546.010,AppInit DLLs,Subtechnique
+T1546.011,Application Shimming,Subtechnique
+T1546.012,Image File Execution Options Injection,Subtechnique
+T1546.013,PowerShell Profile,Subtechnique
+T1546.014,Emond,Subtechnique
+T1546.015,Component Object Model Hijacking,Subtechnique
+T1574,Hijack Execution Flow,Technique
+T1574.001,DLL Search Order Hijacking,Subtechnique
+T1574.002,DLL Side-Loading,Subtechnique
+T1574.004,Dylib Hijacking,Subtechnique
+T1574.005,Executable Installer File Permissions Weakness,Subtechnique
+T1574.006,Dynamic Linker Hijacking,Subtechnique
+T1574.007,Path Interception by PATH Environment Variable,Subtechnique
+T1574.008,Path Interception by Search Order Hijacking,Subtechnique
+T1574.009,Path Interception by Unquoted Path,Subtechnique
+T1574.010,Services File Permissions Weakness,Subtechnique
+T1574.011,Services Registry Permissions Weakness,Subtechnique
+T1574.012,COR_PROFILER,Subtechnique
+T1574.013,KernelCallbackTable,Subtechnique
+T1525,Implant Internal Image,Technique
+T1556,Modify Authentication Process,Technique
+T1556.001,Domain Controller Authentication,Subtechnique
+T1556.002,Password Filter DLL,Subtechnique
+T1556.003,Pluggable Authentication Modules,Subtechnique
+T1556.004,Network Device Authentication,Subtechnique
+T1556.005,Reversible Encryption,Subtechnique
+T1137,Office Application Startup,Technique
+T1137.001,Office Template Macros,Subtechnique
+T1137.002,Office Test,Subtechnique
+T1137.003,Outlook Forms,Subtechnique
+T1137.004,Outlook Home Page,Subtechnique
+T1137.005,Outlook Rules,Subtechnique
+T1137.006,Add-ins,Subtechnique
+T1542,Pre-OS Boot,Technique
+T1542.001,System Firmware,Subtechnique
+T1542.002,Component Firmware,Subtechnique
+T1542.003,Bootkit,Subtechnique
+T1542.004,ROMMONkit,Subtechnique
+T1542.005,TFTP Boot,Subtechnique
+T1505,Server Software Component,Technique
+T1505.001,SQL Stored Procedures,Subtechnique
+T1505.002,Transport Agent,Subtechnique
+T1505.003,Web Shell,Subtechnique
+T1505.004,IIS Components,Subtechnique
+T1505.005,Terminal Services DLL,Subtechnique
+T1205,Traffic Signaling,Technique
+T1205.001,Port Knocking,Subtechnique
+TA0004,Privilege Escalation,Tactic
+T1548,Abuse Elevation Control Mechanism,Technique
+T1548.001,Setuid and Setgid,Subtechnique
+T1548.002,Bypass User Account Control,Subtechnique
+T1548.003,Sudo and Sudo Caching,Subtechnique
+T1548.004,Elevated Execution with Prompt,Subtechnique
+T1134,Access Token Manipulation,Technique
+T1134.001,Token Impersonation/Theft,Subtechnique
+T1134.002,Create Process with Token,Subtechnique
+T1134.003,Make and Impersonate Token,Subtechnique
+T1134.004,Parent PID Spoofing,Subtechnique
+T1134.005,SID-History Injection,Subtechnique
+T1484,Domain Policy Modification,Technique
+T1484.001,Group Policy Modification,Subtechnique
+T1484.002,Domain Trust Modification,Subtechnique
+T1611,Escape to Host,Technique
+T1068,Exploitation for Privilege Escalation,Technique
+T1055,Process Injection,Technique
+T1055.001,Dynamic-link Library Injection,Subtechnique
+T1055.002,Portable Executable Injection,Subtechnique
+T1055.003,Thread Execution Hijacking,Subtechnique
+T1055.004,Asynchronous Procedure Call,Subtechnique
+T1055.005,Thread Local Storage,Subtechnique
+T1055.008,Ptrace System Calls,Subtechnique
+T1055.009,Proc Memory,Subtechnique
+T1055.011,Extra Window Memory Injection,Subtechnique
+T1055.012,Process Hollowing,Subtechnique
+T1055.013,Process Doppelgänging,Subtechnique
+T1055.014,VDSO Hijacking,Subtechnique
+T1055.015,ListPlanting,Subtechnique
+TA0005,Defense Evasion,Tactic
+T1612,Build Image on Host,Technique
+T1622,Debugger Evasion,Technique
+T1140,Deobfuscate/Decode Files or Information,Technique
+T1006,Direct Volume Access,Technique
+T1480,Execution Guardrails,Technique
+T1480.001,Environmental Keying,Subtechnique
+T1211,Exploitation for Defense Evasion,Technique
+T1222,File and Directory Permissions Modification,Technique
+T1222.001,Windows File and Directory Permissions Modification,Subtechnique
+T1222.002,Linux and Mac File and Directory Permissions Modification,Subtechnique
+T1564,Hide Artifacts,Technique
+T1564.001,Hidden Files and Directories,Subtechnique
+T1564.002,Hidden Users,Subtechnique
+T1564.003,Hidden Window,Subtechnique
+T1564.004,NTFS File Attributes,Subtechnique
+T1564.005,Hidden File System,Subtechnique
+T1564.006,Run Virtual Instance,Subtechnique
+T1564.007,VBA Stomping,Subtechnique
+T1564.008,Email Hiding Rules,Subtechnique
+T1564.009,Resource Forking,Subtechnique
+T1564.010,Process Argument Spoofing,Subtechnique
+T1562,Impair Defenses,Technique
+T1562.001,Disable or Modify Tools,Subtechnique
+T1562.002,Disable Windows Event Logging,Subtechnique
+T1562.003,Impair Command History Logging,Subtechnique
+T1562.004,Disable or Modify System Firewall,Subtechnique
+T1562.006,Indicator Blocking,Subtechnique
+T1562.007,Disable or Modify Cloud Firewall,Subtechnique
+T1562.008,Disable Cloud Logs,Subtechnique
+T1562.009,Safe Mode Boot,Subtechnique
+T1562.010,Downgrade Attack,Subtechnique
+T1070,Indicator Removal on Host,Technique
+T1070.001,Clear Windows Event Logs,Subtechnique
+T1070.002,Clear Linux or Mac System Logs,Subtechnique
+T1070.003,Clear Command History,Subtechnique
+T1070.004,File Deletion,Subtechnique
+T1070.005,Network Share Connection Removal,Subtechnique
+T1070.006,Timestomp,Subtechnique
+T1202,Indirect Command Execution,Technique
+T1036,Masquerading,Technique
+T1036.001,Invalid Code Signature,Subtechnique
+T1036.002,Right-to-Left Override,Subtechnique
+T1036.003,Rename System Utilities,Subtechnique
+T1036.004,Masquerade Task or Service,Subtechnique
+T1036.005,Match Legitimate Name or Location,Subtechnique
+T1036.006,Space after Filename,Subtechnique
+T1036.007,Double File Extension,Subtechnique
+T1578,Modify Cloud Compute Infrastructure,Technique
+T1578.001,Create Snapshot,Subtechnique
+T1578.002,Create Cloud Instance,Subtechnique
+T1578.003,Delete Cloud Instance,Subtechnique
+T1578.004,Revert Cloud Instance,Subtechnique
+T1112,Modify Registry,Technique
+T1601,Modify System Image,Technique
+T1601.001,Patch System Image,Subtechnique
+T1601.002,Downgrade System Image,Subtechnique
+T1599,Network Boundary Bridging,Technique
+T1599.001,Network Address Translation Traversal,Subtechnique
+T1027,Obfuscated Files or Information,Technique
+T1027.001,Binary Padding,Subtechnique
+T1027.002,Software Packing,Subtechnique
+T1027.003,Steganography,Subtechnique
+T1027.004,Compile After Delivery,Subtechnique
+T1027.005,Indicator Removal from Tools,Subtechnique
+T1027.006,HTML Smuggling,Subtechnique
+T1647,Plist File Modification,Technique
+T1620,Reflective Code Loading,Technique
+T1207,Rogue Domain Controller,Technique
+T1014,Rootkit,Technique
+T1553,Subvert Trust Controls,Technique
+T1553.001,Gatekeeper Bypass,Subtechnique
+T1553.002,Code Signing,Subtechnique
+T1553.003,SIP and Trust Provider Hijacking,Subtechnique
+T1553.004,Install Root Certificate,Subtechnique
+T1553.005,Mark-of-the-Web Bypass,Subtechnique
+T1553.006,Code Signing Policy Modification,Subtechnique
+T1218,System Binary Proxy Execution,Technique
+T1218.001,Compiled HTML File,Subtechnique
+T1218.002,Control Panel,Subtechnique
+T1218.003,CMSTP,Subtechnique
+T1218.004,InstallUtil,Subtechnique
+T1218.005,Mshta,Subtechnique
+T1218.007,Msiexec,Subtechnique
+T1218.008,Odbcconf,Subtechnique
+T1218.009,Regsvcs/Regasm,Subtechnique
+T1218.010,Regsvr32,Subtechnique
+T1218.011,Rundll32,Subtechnique
+T1218.012,Verclsid,Subtechnique
+T1218.013,Mavinject,Subtechnique
+T1218.014,MMC,Subtechnique
+T1216,System Script Proxy Execution,Technique
+T1216.001,PubPrn,Subtechnique
+T1221,Template Injection,Technique
+T1127,Trusted Developer Utilities Proxy Execution,Technique
+T1127.001,MSBuild,Subtechnique
+T1535,Unused/Unsupported Cloud Regions,Technique
+T1550,Use Alternate Authentication Material,Technique
+T1550.001,Application Access Token,Subtechnique
+T1550.002,Pass the Hash,Subtechnique
+T1550.003,Pass the Ticket,Subtechnique
+T1550.004,Web Session Cookie,Subtechnique
+T1497,Virtualization/Sandbox Evasion,Technique
+T1497.001,System Checks,Subtechnique
+T1497.002,User Activity Based Checks,Subtechnique
+T1497.003,Time Based Evasion,Subtechnique
+T1600,Weaken Encryption,Technique
+T1600.001,Reduce Key Space,Subtechnique
+T1600.002,Disable Crypto Hardware,Subtechnique
+T1220,XSL Script Processing,Technique
+TA0006,Credential Access,Tactic
+T1557,Adversary-in-the-Middle,Technique
+T1557.001,LLMNR/NBT-NS Poisoning and SMB Relay,Subtechnique
+T1557.002,ARP Cache Poisoning,Subtechnique
+T1557.003,DHCP Spoofing,Subtechnique
+T1110,Brute Force,Technique
+T1110.001,Password Guessing,Subtechnique
+T1110.002,Password Cracking,Subtechnique
+T1110.003,Password Spraying,Subtechnique
+T1110.004,Credential Stuffing,Subtechnique
+T1555,Credentials from Password Stores,Technique
+T1555.001,Keychain,Subtechnique
+T1555.002,Securityd Memory,Subtechnique
+T1555.003,Credentials from Web Browsers,Subtechnique
+T1555.004,Windows Credential Manager,Subtechnique
+T1555.005,Password Managers,Subtechnique
+T1212,Exploitation for Credential Access,Technique
+T1187,Forced Authentication,Technique
+T1606,Forge Web Credentials,Technique
+T1606.001,Web Cookies,Subtechnique
+T1606.002,SAML Tokens,Subtechnique
+T1056,Input Capture,Technique
+T1056.001,Keylogging,Subtechnique
+T1056.002,GUI Input Capture,Subtechnique
+T1056.003,Web Portal Capture,Subtechnique
+T1056.004,Credential API Hooking,Subtechnique
+T1111,Multi-Factor Authentication Interception,Technique
+T1621,Multi-Factor Authentication Request Generation,Technique
+T1040,Network Sniffing,Technique
+T1003,OS Credential Dumping,Technique
+T1003.001,LSASS Memory,Subtechnique
+T1003.002,Security Account Manager,Subtechnique
+T1003.003,NTDS,Subtechnique
+T1003.004,LSA Secrets,Subtechnique
+T1003.005,Cached Domain Credentials,Subtechnique
+T1003.006,DCSync,Subtechnique
+T1003.007,Proc Filesystem,Subtechnique
+T1003.008,/etc/passwd and /etc/shadow,Subtechnique
+T1528,Steal Application Access Token,Technique
+T1558,Steal or Forge Kerberos Tickets,Technique
+T1558.001,Golden Ticket,Subtechnique
+T1558.002,Silver Ticket,Subtechnique
+T1558.003,Kerberoasting,Subtechnique
+T1558.004,AS-REP Roasting,Subtechnique
+T1539,Steal Web Session Cookie,Technique
+T1552,Unsecured Credentials,Technique
+T1552.001,Credentials In Files,Subtechnique
+T1552.002,Credentials in Registry,Subtechnique
+T1552.003,Bash History,Subtechnique
+T1552.004,Private Keys,Subtechnique
+T1552.005,Cloud Instance Metadata API,Subtechnique
+T1552.006,Group Policy Preferences,Subtechnique
+T1552.007,Container API,Subtechnique
+TA0007,Discovery,Tactic
+T1087,Account Discovery,Technique
+T1087.001,Local Account,Subtechnique
+T1087.002,Domain Account,Subtechnique
+T1087.003,Email Account,Subtechnique
+T1087.004,Cloud Account,Subtechnique
+T1010,Application Window Discovery,Technique
+T1217,Browser Bookmark Discovery,Technique
+T1580,Cloud Infrastructure Discovery,Technique
+T1538,Cloud Service Dashboard,Technique
+T1526,Cloud Service Discovery,Technique
+T1619,Cloud Storage Object Discovery,Technique
+T1613,Container and Resource Discovery,Technique
+T1482,Domain Trust Discovery,Technique
+T1083,File and Directory Discovery,Technique
+T1615,Group Policy Discovery,Technique
+T1046,Network Service Discovery,Technique
+T1135,Network Share Discovery,Technique
+T1201,Password Policy Discovery,Technique
+T1120,Peripheral Device Discovery,Technique
+T1069,Permission Groups Discovery,Technique
+T1069.001,Local Groups,Subtechnique
+T1069.002,Domain Groups,Subtechnique
+T1069.003,Cloud Groups,Subtechnique
+T1057,Process Discovery,Technique
+T1012,Query Registry,Technique
+T1018,Remote System Discovery,Technique
+T1518,Software Discovery,Technique
+T1518.001,Security Software Discovery,Subtechnique
+T1082,System Information Discovery,Technique
+T1614,System Location Discovery,Technique
+T1614.001,System Language Discovery,Subtechnique
+T1016,System Network Configuration Discovery,Technique
+T1016.001,Internet Connection Discovery,Subtechnique
+T1049,System Network Connections Discovery,Technique
+T1033,System Owner/User Discovery,Technique
+T1007,System Service Discovery,Technique
+T1124,System Time Discovery,Technique
+TA0008,Lateral Movement,Tactic
+T1210,Exploitation of Remote Services,Technique
+T1534,Internal Spearphishing,Technique
+T1570,Lateral Tool Transfer,Technique
+T1563,Remote Service Session Hijacking,Technique
+T1563.001,SSH Hijacking,Subtechnique
+T1563.002,RDP Hijacking,Subtechnique
+T1021,Remote Services,Technique
+T1021.001,Remote Desktop Protocol,Subtechnique
+T1021.002,SMB/Windows Admin Shares,Subtechnique
+T1021.003,Distributed Component Object Model,Subtechnique
+T1021.004,SSH,Subtechnique
+T1021.005,VNC,Subtechnique
+T1021.006,Windows Remote Management,Subtechnique
+T1080,Taint Shared Content,Technique
+TA0009,Collection,Tactic
+T1560,Archive Collected Data,Technique
+T1560.001,Archive via Utility,Subtechnique
+T1560.002,Archive via Library,Subtechnique
+T1560.003,Archive via Custom Method,Subtechnique
+T1123,Audio Capture,Technique
+T1119,Automated Collection,Technique
+T1185,Browser Session Hijacking,Technique
+T1115,Clipboard Data,Technique
+T1530,Data from Cloud Storage Object,Technique
+T1602,Data from Configuration Repository,Technique
+T1602.001,SNMP (MIB Dump),Subtechnique
+T1602.002,Network Device Configuration Dump,Subtechnique
+T1213,Data from Information Repositories,Technique
+T1213.001,Confluence,Subtechnique
+T1213.002,Sharepoint,Subtechnique
+T1213.003,Code Repositories,Subtechnique
+T1005,Data from Local System,Technique
+T1039,Data from Network Shared Drive,Technique
+T1025,Data from Removable Media,Technique
+T1074,Data Staged,Technique
+T1074.001,Local Data Staging,Subtechnique
+T1074.002,Remote Data Staging,Subtechnique
+T1114,Email Collection,Technique
+T1114.001,Local Email Collection,Subtechnique
+T1114.002,Remote Email Collection,Subtechnique
+T1114.003,Email Forwarding Rule,Subtechnique
+T1113,Screen Capture,Technique
+T1125,Video Capture,Technique
+TA0011,Command and Control,Tactic
+T1071,Application Layer Protocol,Technique
+T1071.001,Web Protocols,Subtechnique
+T1071.002,File Transfer Protocols,Subtechnique
+T1071.003,Mail Protocols,Subtechnique
+T1071.004,DNS,Subtechnique
+T1092,Communication Through Removable Media,Technique
+T1132,Data Encoding,Technique
+T1132.001,Standard Encoding,Subtechnique
+T1132.002,Non-Standard Encoding,Subtechnique
+T1001,Data Obfuscation,Technique
+T1001.001,Junk Data,Subtechnique
+T1001.002,Steganography,Subtechnique
+T1001.003,Protocol Impersonation,Subtechnique
+T1568,Dynamic Resolution,Technique
+T1568.001,Fast Flux DNS,Subtechnique
+T1568.002,Domain Generation Algorithms,Subtechnique
+T1568.003,DNS Calculation,Subtechnique
+T1573,Encrypted Channel,Technique
+T1573.001,Symmetric Cryptography,Subtechnique
+T1573.002,Asymmetric Cryptography,Subtechnique
+T1008,Fallback Channels,Technique
+T1105,Ingress Tool Transfer,Technique
+T1104,Multi-Stage Channels,Technique
+T1095,Non-Application Layer Protocol,Technique
+T1571,Non-Standard Port,Technique
+T1572,Protocol Tunneling,Technique
+T1090,Proxy,Technique
+T1090.001,Internal Proxy,Subtechnique
+T1090.002,External Proxy,Subtechnique
+T1090.003,Multi-hop Proxy,Subtechnique
+T1090.004,Domain Fronting,Subtechnique
+T1219,Remote Access Software,Technique
+T1102,Web Service,Technique
+T1102.001,Dead Drop Resolver,Subtechnique
+T1102.002,Bidirectional Communication,Subtechnique
+T1102.003,One-Way Communication,Subtechnique
+TA0010,Exfiltration,Tactic
+T1020,Automated Exfiltration,Technique
+T1020.001,Traffic Duplication,Subtechnique
+T1030,Data Transfer Size Limits,Technique
+T1048,Exfiltration Over Alternative Protocol,Technique
+T1048.001,Exfiltration Over Symmetric Encrypted Non-C2 Protocol,Subtechnique
+T1048.002,Exfiltration Over Asymmetric Encrypted Non-C2 Protocol,Subtechnique
+T1048.003,Exfiltration Over Unencrypted Non-C2 Protocol,Subtechnique
+T1041,Exfiltration Over C2 Channel,Technique
+T1011,Exfiltration Over Other Network Medium,Technique
+T1011.001,Exfiltration Over Bluetooth,Subtechnique
+T1052,Exfiltration Over Physical Medium,Technique
+T1052.001,Exfiltration over USB,Subtechnique
+T1567,Exfiltration Over Web Service,Technique
+T1567.001,Exfiltration to Code Repository,Subtechnique
+T1567.002,Exfiltration to Cloud Storage,Subtechnique
+T1029,Scheduled Transfer,Technique
+T1537,Transfer Data to Cloud Account,Technique
+TA0040,Impact,Tactic
+T1531,Account Access Removal,Technique
+T1485,Data Destruction,Technique
+T1486,Data Encrypted for Impact,Technique
+T1565,Data Manipulation,Technique
+T1565.001,Stored Data Manipulation,Subtechnique
+T1565.002,Transmitted Data Manipulation,Subtechnique
+T1565.003,Runtime Data Manipulation,Subtechnique
+T1491,Defacement,Technique
+T1491.001,Internal Defacement,Subtechnique
+T1491.002,External Defacement,Subtechnique
+T1561,Disk Wipe,Technique
+T1561.001,Disk Content Wipe,Subtechnique
+T1561.002,Disk Structure Wipe,Subtechnique
+T1499,Endpoint Denial of Service,Technique
+T1499.001,OS Exhaustion Flood,Subtechnique
+T1499.002,Service Exhaustion Flood,Subtechnique
+T1499.003,Application Exhaustion Flood,Subtechnique
+T1499.004,Application or System Exploitation,Subtechnique
+T1495,Firmware Corruption,Technique
+T1490,Inhibit System Recovery,Technique
+T1498,Network Denial of Service,Technique
+T1498.001,Direct Network Flood,Subtechnique
+T1498.002,Reflection Amplification,Subtechnique
+T1496,Resource Hijacking,Technique
+T1489,Service Stop,Technique
+T1529,System Shutdown/Reboot,Technique

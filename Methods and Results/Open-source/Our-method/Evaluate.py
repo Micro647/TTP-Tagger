@@ -1,0 +1,322 @@
+﻿#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+ATT&CK Tactic and Technique Classification Evaluation Script
+Evaluates model predictions against ground truth labels
+"""
+
+import pandas as pd
+import json
+import re
+import numpy as np
+from sklearn.metrics import (
+    hamming_loss, precision_score, recall_score, f1_score, 
+    fbeta_score, accuracy_score
+)
+
+# ==================== Configuration ====================
+# Input/Output file names (academic naming convention)
+INPUT_JSON = "TTP-Tagger.json"              # Original model predictions
+INTERMEDIATE_JSON = "evaluation_intermediate.json"    # Intermediate processed results
+FINAL_JSON = "evaluation_final_results.json"          # Final formatted evaluation results
+
+# Ground truth labels for techniques (now in current directory)
+GROUND_TRUTH_JSON = "convert-state.json"    # Ground truth labels for techniques
+
+# ATT&CK labels
+TACTIC_LABELS = ['TA0043', 'TA0042', 'TA0001', 'TA0002', 'TA0003', 'TA0004', 
+                 'TA0005', 'TA0006', 'TA0007', 'TA0008', 'TA0009', 'TA0011', 
+                 'TA0010', 'TA0040']
+
+TECHNIQUE_LABELS = ['T1546.010', 'T1205', 'T1546', 'T1189', 'T1553.005', 'T1550', 
+                    'T1048', 'T1087.002', 'T1021.001', 'T1598.003', 'T1200', 'T1531', 
+                    'T1491.001', 'T1132.001', 'T1055.001', 'T1498.001', 'T1555.005',
+                    'T1102.003', 'T1578.003', 'T1592.002', 'T1090.001', 'T1003.002', 
+                    'T1562.002', 'T1619', 'T1021.004', 'T1134.003', 'T1029', 'T1567.002',
+                    'T1561.001', 'T1490', 'T1011.001', 'T1518.001', 'T1210', 'T1497',
+                    'T1072', 'T1134.004', 'T1595.003', 'T1547.012', 'T1498.002', 'T1491',
+                    'T1552.003', 'T1001.002', 'T1585.001', 'T1114', 'T1098.001', 'T1542.003',
+                    'T1622', 'T1563.001', 'T1027.005', 'T1001.001', 'T1495', 'T1505',
+                    'T1546.009', 'T1056.001', 'T1021.003', 'T1104', 'T1041', 'T1548.004',
+                    'T1040', 'T1105', 'T1525', 'T1074.001', 'T1553.006', 'T1213', 'T1547.007',
+                    'T1589.002', 'T1078', 'T1542.005', 'T1053.007', 'T1112', 'T1137.006',
+                    'T1070.006', 'T1114.002', 'T1115', 'T1562.001', 'T1003.008', 'T1561',
+                    'T1535', 'T1621', 'T1546.012', 'T1546.014', 'T1553.002', 'T1591',
+                    'T1578.002', 'T1012', 'T1021', 'T1053.002', 'T1195.003', 'T1548.002',
+                    'T1136.001', 'T1204.001', 'T1137', 'T1132', 'T1564.008', 'T1102.002',
+                    'T1049', 'T1187', 'T1129', 'T1574.012', 'T1070.005', 'T1573', 'T1547.004',
+                    'T1092', 'T1555.004', 'T1037.002', 'T1596.004', 'T1018', 'T1484.002',
+                    'T1055.004', 'T1037', 'T1590.006', 'T1098.005', 'T1052.001', 'T1110.003',
+                    'T1598.002', 'T1564.010', 'T1584.003', 'T1218', 'T1211', 'T1213.003',
+                    'T1590.003', 'T1584.001', 'T1553.001', 'T1550.001', 'T1573.002', 'T1027.004',
+                    'T1542.004', 'T1564.003', 'T1056.004', 'T1584.004', 'T1027.001', 'T1647',
+                    'T1071.001', 'T1218.003', 'T1565.001', 'T1070.004', 'T1596.003', 'T1555.001',
+                    'T1071.004', 'T1114.001', 'T1588.006', 'T1555.003', 'T1055.009', 'T1608.003',
+                    'T1596.005', 'T1102', 'T1583.006', 'T1568.003', 'T1204.002', 'T1053.005',
+                    'T1587.004', 'T1590.001', 'T1574.009', 'T1590.002', 'T1134.002', 'T1098',
+                    'T1574.013', 'T1059.003', 'T1070.002', 'T1110.004', 'T1596.002', 'T1550.003',
+                    'T1608.005', 'T1588.002', 'T1559.003', 'T1489', 'T1574.007', 'T1559.002',
+                    'T1098.002', 'T1030', 'T1574.005', 'T1564.009', 'T1546.006', 'T1563.002',
+                    'T1087.001', 'T1593.001', 'T1087.004', 'T1552.002', 'T1568.001', 'T1047',
+                    'T1020.001', 'T1588.001', 'T1055', 'T1176', 'T1195.001', 'T1496', 'T1055.005',
+                    'T1080', 'T1059.002', 'T1204', 'T1213.001', 'T1566.003', 'T1615', 'T1573.001',
+                    'T1074', 'T1056.003', 'T1562.008', 'T1505.001', 'T1543.003', 'T1202', 'T1595',
+                    'T1480.001', 'T1056.002', 'T1584.005', 'T1218.010', 'T1207', 'T1125', 'T1574.004',
+                    'T1218.004', 'T1127', 'T1547.001', 'T1599', 'T1553', 'T1068', 'T1547.014',
+                    'T1069', 'T1546.005', 'T1566.002', 'T1195.002', 'T1600.001', 'T1218.013',
+                    'T1526', 'T1070.003', 'T1568', 'T1546.004', 'T1556.005', 'T1201', 'T1137.004',
+                    'T1567.001', 'T1048.002', 'T1562.003', 'T1090', 'T1203', 'T1505.005', 'T1484',
+                    'T1059.008', 'T1059.006', 'T1609', 'T1218.012', 'T1611', 'T1558.003', 'T1499',
+                    'T1595.001', 'T1538', 'T1546.011', 'T1499.002', 'T1124', 'T1599.001', 'T1608.001',
+                    'T1027', 'T1534', 'T1110.002', 'T1574.006', 'T1003.004', 'T1053.003', 'T1001',
+                    'T1220', 'T1006', 'T1036.001', 'T1499.003', 'T1055.002', 'T1559', 'T1546.007',
+                    'T1120', 'T1590', 'T1560', 'T1106', 'T1020', 'T1578.001', 'T1594', 'T1585',
+                    'T1595.002', 'T1055.008', 'T1558.002', 'T1499.001', 'T1055.014', 'T1222.002',
+                    'T1574.011', 'T1098.003', 'T1564.001', 'T1055.015', 'T1591.003', 'T1567',
+                    'T1003', 'T1003.005', 'T1566.001', 'T1585.002', 'T1559.001', 'T1219', 'T1114.003',
+                    'T1588.004', 'T1132.002', 'T1587.001', 'T1552.001', 'T1608.002', 'T1546.013',
+                    'T1583.004', 'T1558.001', 'T1602', 'T1547.009', 'T1606.001', 'T1027.006',
+                    'T1003.003', 'T1588.003', 'T1543.002', 'T1102.001', 'T1547.006', 'T1037.005',
+                    'T1123', 'T1039', 'T1530', 'T1592.003', 'T1204.003', 'T1562.007', 'T1556',
+                    'T1574.010', 'T1046', 'T1091', 'T1542.001', 'T1569.002', 'T1137.002', 'T1222',
+                    'T1596.001', 'T1195', 'T1587.002', 'T1491.002', 'T1216.001', 'T1548.001',
+                    'T1003.006', 'T1136', 'T1565.003', 'T1218.002', 'T1555.002', 'T1078.001',
+                    'T1546.001', 'T1600', 'T1557.002', 'T1090.002', 'T1614.001', 'T1558.004',
+                    'T1036.007', 'T1505.002', 'T1010', 'T1564.007', 'T1529', 'T1565', 'T1564.005',
+                    'T1586', 'T1557', 'T1598', 'T1547.008', 'T1601.002', 'T1218.008', 'T1137.001',
+                    'T1597.002', 'T1578.004', 'T1537', 'T1586.002', 'T1547.002', 'T1036.002',
+                    'T1185', 'T1574', 'T1027.002', 'T1052', 'T1135', 'T1588', 'T1098.004',
+                    'T1027.003', 'T1497.001', 'T1586.001', 'T1016', 'T1600.002', 'T1137.005',
+                    'T1008', 'T1136.003', 'T1003.007', 'T1583.005', 'T1048.001', 'T1601', 'T1606',
+                    'T1133', 'T1564.004', 'T1574.008', 'T1612', 'T1037.003', 'T1574.002',
+                    'T1542.002', 'T1542', 'T1048.003', 'T1059.007', 'T1218.011', 'T1583.001',
+                    'T1071.002', 'T1070', 'T1037.001', 'T1083', 'T1071.003', 'T1546.008',
+                    'T1552.005', 'T1587', 'T1095', 'T1589.001', 'T1482', 'T1003.001', 'T1497.003',
+                    'T1557.001', 'T1021.005', 'T1036.004', 'T1602.001', 'T1557.003', 'T1528',
+                    'T1486', 'T1485', 'T1583', 'T1078.003', 'T1055.012', 'T1566', 'T1222.001',
+                    'T1053.006', 'T1036.003', 'T1016.001', 'T1055.003', 'T1221', 'T1055.013',
+                    'T1218.001', 'T1218.014', 'T1190', 'T1553.003', 'T1571', 'T1140', 'T1033',
+                    'T1218.007', 'T1059.001', 'T1591.001', 'T1056', 'T1011', 'T1596', 'T1078.002',
+                    'T1591.004', 'T1547', 'T1561.002', 'T1082', 'T1543.004', 'T1547.010',
+                    'T1090.004', 'T1069.002', 'T1555', 'T1570', 'T1078.004', 'T1608', 'T1021.006',
+                    'T1480', 'T1560.002', 'T1608.004', 'T1547.003', 'T1569', 'T1565.002',
+                    'T1218.005', 'T1110.001', 'T1583.002', 'T1134.001', 'T1539', 'T1550.004',
+                    'T1087', 'T1597', 'T1505.004', 'T1606.002', 'T1069.001', 'T1087.003',
+                    'T1484.001', 'T1505.003', 'T1543.001', 'T1593', 'T1614', 'T1499.004',
+                    'T1568.002', 'T1546.003', 'T1059.005', 'T1580', 'T1553.004', 'T1552',
+                    'T1213.002', 'T1589', 'T1071', 'T1597.001', 'T1554', 'T1569.001', 'T1601.001',
+                    'T1584', 'T1036', 'T1584.002', 'T1572', 'T1556.003', 'T1036.006', 'T1591.002',
+                    'T1199', 'T1547.015', 'T1552.006', 'T1134', 'T1074.002', 'T1216', 'T1620',
+                    'T1057', 'T1055.011', 'T1548.003', 'T1564', 'T1218.009', 'T1563', 'T1590.004',
+                    'T1552.004', 'T1005', 'T1021.002', 'T1564.002', 'T1547.013', 'T1070.001',
+                    'T1613', 'T1588.005', 'T1025', 'T1127.001', 'T1212', 'T1205.001', 'T1543',
+                    'T1562', 'T1014', 'T1562.004', 'T1119', 'T1610', 'T1550.002', 'T1546.002',
+                    'T1111', 'T1560.001', 'T1547.005', 'T1592.004', 'T1059', 'T1498', 'T1037.004',
+                    'T1552.007', 'T1136.002', 'T1113', 'T1587.003', 'T1548', 'T1090.003', 'T1592',
+                    'T1564.006', 'T1556.004', 'T1590.005', 'T1589.003', 'T1562.010', 'T1578',
+                    'T1562.009', 'T1562.006', 'T1598.001', 'T1592.001', 'T1110', 'T1069.003',
+                    'T1546.015', 'T1497.002', 'T1584.006', 'T1137.003', 'T1556.001', 'T1059.004',
+                    'T1556.002', 'T1602.002', 'T1593.002', 'T1583.003', 'T1574.001', 'T1134.005',
+                    'T1518', 'T1197', 'T1036.005', 'T1558', 'T1007', 'T1001.003', 'T1053', 'T1217',
+                    'T1560.003']
+
+# Regex pattern for ATT&CK labels
+PATTERN = re.compile(r'\b(TA\d{4}|T\d{4}(\.\d{3})?)\b')
+
+# ==================== Label Conversion Functions ====================
+
+def load_label_mapping(csv_file):
+    """Load label mapping from CSV file"""
+    df = pd.read_csv(csv_file)
+    label_mapping = {}
+    for _, row in df.iterrows():
+        label_mapping[row['Label']] = (row['Name'], row['Type'])
+    return label_mapping
+
+def convert_labels(text):
+    """Convert MITRE ATT&CK labels to ID format"""
+    name_to_id = {}
+    type_name_to_id = {}
+    priority_types = ['tactic', 'technique', 'subtechnique']
+    
+    # Load mapping from CSV
+    csv_data = pd.read_csv('mitre_attack_matrix-0116.csv')
+    for _, row in csv_data.iterrows():
+        name = row['Name'].lower().strip()
+        name_to_id[name] = row['Label']
+        key = f"{row['Type'].lower()}:{name}"
+        type_name_to_id[key] = row['Label']
+    
+    found_labels = []
+    
+    # Match labels with type prefix
+    prefixed_matches = re.findall(r'\b(Tactic|Technique|Subtechnique):([^,\s]+(?:\s[^,\s]+)*)', text)
+    for type_val, name_val in prefixed_matches:
+        type_val = type_val.lower().strip()
+        name_val = name_val.lower().strip().rstrip('.')
+        key = f"{type_val}:{name_val}"
+        if key in type_name_to_id:
+            found_labels.append(f"{type_val.capitalize()}:{type_name_to_id[key]}")
+        elif name_val in name_to_id:
+            possible_types = [t for t in priority_types if f"{t}:{name_val}" in type_name_to_id]
+            if possible_types:
+                selected_type = next((t for t in priority_types if t in possible_types), possible_types[0])
+                found_labels.append(f"{selected_type.capitalize()}:{name_to_id[name_val]}")
+    
+    # Match labels without type prefix
+    non_prefixed_matches = re.findall(r'\b(?!Tactic:|Technique:|Subtechnique:)([A-Z][A-Za-z\s]+(?: [A-Z][A-Za-z\s]+)*)\b', text)
+    for name_val in non_prefixed_matches:
+        name_val = name_val.lower().strip().rstrip('.')
+        if name_val in name_to_id:
+            possible_types = [t for t in priority_types if f"{t}:{name_val}" in type_name_to_id]
+            if possible_types:
+                selected_type = next((t for t in priority_types if t in possible_types), possible_types[0])
+                found_labels.append(f"{selected_type.capitalize()}:{name_to_id[name_val]}")
+    
+    # Remove duplicates
+    unique_labels = list(dict.fromkeys(found_labels))
+    
+    return 'the tactics and techniques labels are ' + ', '.join(unique_labels)
+
+# ==================== Data Processing ====================
+
+# Read model output JSON
+with open(INPUT_JSON, 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+# Process each data item
+for item in data:
+    item['model_output'] = convert_labels(item['model_output'])
+    if 'golden_output' in item:
+        item['golden_output'] = convert_labels(item['golden_output'])
+
+# Save intermediate results
+with open(INTERMEDIATE_JSON, 'w', encoding='utf-8') as file:
+    json.dump(data, file, indent=4, ensure_ascii=False)
+
+# Standard instruction text
+INSTRUCTION_TEXT = """you are an expert in the field of cyber security and are familiar with MITRE's ATT&CK framework, please help me map the following sentences describing tactic's labels and technique's labels to the corresponding ATT&CK framework labels, It is important to note that this is a multi-label classification endeavor, where the majority of labels are fewer than five, with very few ranging from six to ten, and virtually none exceeding ten."""
+
+# Transform each entry
+transformed_data = []
+for item in data:
+    transformed_data.append({
+        "instruction": INSTRUCTION_TEXT,
+        "input": item["input"],
+        "golden_output": item["golden_output"],
+        "model_output": {
+            "role": "assistant",
+            "content": item["model_output"]
+        }
+    })
+
+# Save final formatted results
+with open(FINAL_JSON, 'w', encoding='utf-8') as f:
+    json.dump(transformed_data, f, indent=4, ensure_ascii=False)
+
+print(f"Conversion completed! Results saved to {FINAL_JSON}")
+
+# ==================== Evaluation ====================
+
+# Load and evaluate tactic predictions
+with open(FINAL_JSON, 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+# Extract tactic labels from model output
+results = []
+for item in data:
+    model_output = item['model_output']['content']
+    found_labels = set(match[0] for match in re.findall(PATTERN, model_output))
+    label_array = [1 if label in found_labels else 0 for label in TACTIC_LABELS]
+    results.append(label_array)
+
+ta_model_outputs_bi = np.array(results)
+
+# Extract ground truth tactic labels
+results = []
+for item in data:
+    model_output = item['golden_output']
+    found_labels = set(match[0] for match in re.findall(PATTERN, model_output))
+    label_array = [1 if label in found_labels else 0 for label in TACTIC_LABELS]
+    results.append(label_array)
+
+ta_true = np.array(results)
+
+# Print tactic evaluation metrics
+print('\n' + '='*60)
+print('TACTIC CLASSIFICATION RESULTS')
+print('='*60)
+print(f'Hamming loss: {hamming_loss(ta_true, ta_model_outputs_bi):.6f}')
+print(f'Precision (samples): {precision_score(ta_true, ta_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'Precision (macro): {precision_score(ta_true, ta_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'Precision (micro): {precision_score(ta_true, ta_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'Recall (samples): {recall_score(ta_true, ta_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'Recall (macro): {recall_score(ta_true, ta_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'Recall (micro): {recall_score(ta_true, ta_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'F1 (samples): {f1_score(ta_true, ta_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'F1 (macro): {f1_score(ta_true, ta_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'F1 (micro): {f1_score(ta_true, ta_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'F0.5 (samples): {fbeta_score(ta_true, ta_model_outputs_bi, beta=0.5, average="samples", zero_division=0):.6f}')
+print(f'F0.5 (macro): {fbeta_score(ta_true, ta_model_outputs_bi, beta=0.5, average="macro", zero_division=0):.6f}')
+print(f'F0.5 (micro): {fbeta_score(ta_true, ta_model_outputs_bi, beta=0.5, average="micro", zero_division=0):.6f}')
+print(f'Accuracy: {accuracy_score(ta_true, ta_model_outputs_bi):.6f}')
+
+# ==================== Technique Evaluation ====================
+
+print('\n' + '='*60)
+print('TECHNIQUE CLASSIFICATION RESULTS')
+print('='*60)
+
+# Extract technique labels from model output
+results = []
+for item in data:
+    model_output = item['model_output']['content']
+    found_labels = set(match[0] for match in re.findall(PATTERN, model_output))
+    ta_pattern = re.compile(r'^TA')
+    te_labels = {label for label in found_labels if not ta_pattern.match(label)}
+    label_array = [1 if label in te_labels else 0 for label in TECHNIQUE_LABELS]
+    results.append(label_array)
+
+te_model_outputs_bi = np.array(results)
+
+# Load ground truth from separate file (now in current directory)
+with open(GROUND_TRUTH_JSON, 'r', encoding='utf-8') as file:
+    truth_data = json.load(file)
+
+# Extract ground truth technique labels
+results = []
+for item in truth_data:
+    model_output = item['instances'][0]['output']
+    found_labels = set(match[0] for match in re.findall(PATTERN, model_output))
+    label_array = [1 if label in found_labels else 0 for label in TECHNIQUE_LABELS]
+    results.append(label_array)
+
+te_true = np.array(results)
+
+# Ensure matching dimensions
+if len(te_true) != len(te_model_outputs_bi):
+    print(f"Warning: Dimension mismatch - GT: {len(te_true)}, Pred: {len(te_model_outputs_bi)}")
+    min_len = min(len(te_true), len(te_model_outputs_bi))
+    te_true = te_true[:min_len]
+    te_model_outputs_bi = te_model_outputs_bi[:min_len]
+
+# Print technique evaluation metrics
+print(f'Total samples evaluated: {len(te_true)}')
+print(f'Hamming loss: {hamming_loss(te_true, te_model_outputs_bi):.6f}')
+print(f'Precision (samples): {precision_score(te_true, te_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'Precision (macro): {precision_score(te_true, te_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'Precision (micro): {precision_score(te_true, te_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'Recall (samples): {recall_score(te_true, te_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'Recall (macro): {recall_score(te_true, te_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'Recall (micro): {recall_score(te_true, te_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'F1 (samples): {f1_score(te_true, te_model_outputs_bi, average="samples", zero_division=0):.6f}')
+print(f'F1 (macro): {f1_score(te_true, te_model_outputs_bi, average="macro", zero_division=0):.6f}')
+print(f'F1 (micro): {f1_score(te_true, te_model_outputs_bi, average="micro", zero_division=0):.6f}')
+print(f'F0.5 (samples): {fbeta_score(te_true, te_model_outputs_bi, beta=0.5, average="samples", zero_division=0):.6f}')
+print(f'F0.5 (macro): {fbeta_score(te_true, te_model_outputs_bi, beta=0.5, average="macro", zero_division=0):.6f}')
+print(f'F0.5 (micro): {fbeta_score(te_true, te_model_outputs_bi, beta=0.5, average="micro", zero_division=0):.6f}')
+print(f'Accuracy: {accuracy_score(te_true, te_model_outputs_bi):.6f}')
+
+print('\n' + '='*60)
+print('Evaluation completed successfully!')
+print('='*60)

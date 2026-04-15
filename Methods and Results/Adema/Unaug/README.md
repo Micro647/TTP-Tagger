@@ -1,0 +1,15 @@
+# Adema
+
+# Files
+## Datasets
+### TRAM
+- `tram_original.json`: The raw file copy from [TRAM](https://github.com/center-for-threat-informed-defense/tram/tree/main/data).
+- `tram_original_with_labels.json`: The original TRAM dataset with technique names converted into technique IDs.
+- `tram_with_all_labels.csv`: Text samples built from TRAM dataset with all labels annonated.
+
+### ATT&amp;CK
+- `attack_original.csv`: Text samples from ATT&amp;CK web pages with single label annonated.
+- `attack_with_all_labels.csv`: Text samples integrated from the single label file with all labels annonated.
+
+## Scripts
+- `main.py`: Code for experiments.
